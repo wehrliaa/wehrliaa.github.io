@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}">
+<head>
+	<title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+	<link rel='alternate' type='application/rss+xml' title="{{ .Site.Title }} RSS" href='/index.xml'>
+	{{ with .Site.Params.favicon }}<link rel="icon" href="{{ . }}">
+	{{ end -}}
+	<meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}">
+	{{ if isset .Params "tags" }}<meta name="keywords" content="{{ with .Params.tags }}{{ delimit . ", " }}{{ end }}">
+	{{ end -}}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="index, follow">
+	<meta charset="utf-8">
+	<link rel='stylesheet' type='text/css' href='/style.css'>
+</head>
+<body>
+	<div class="box">
+		{{ if .Param "header" }}
+		<h1>{{.Title}}</h1>
+		{{ if .Param "subtitle" }}
+		<p class="subtitle">{{ .Param "subtitle" }}</p>
+		{{ end }}
+		{{ end }}
+		{{ $content := .Content }}
+		{{ $content = replaceRE `<a href="(https?://.+)">` `<a href="$1" target="_blank">` $content | safeHTML }}
+		{{ $content | safeHTML }}
+	</div>
+<footer>
+<div class="buttons">
+</footer>
+</body>
+</html>

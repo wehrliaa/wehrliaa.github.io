@@ -1,0 +1,25 @@
+title = "Wehrlia"
+baseURL = ''
+languageCode = 'en-us'
+theme = 'theme1'
+uglyURLs = true
+titleCaseStyle = 'none'
+
+ignoreErrors = ["error-disable-taxonomy"]
+disableKinds = ["sitemap", "robotsTXT", "404", "taxonomy", "term"]
+
+[params]
+	favicon = "/favicon.ico"
+	taglist = false
+
+[markup]
+	[markup.goldmark]
+		[markup.goldmark.renderer]
+			unsafe = true
+		[markup.goldmark.extensions]
+			[markup.goldmark.extensions.extras]
+				[markup.goldmark.extensions.extras.subscript]
+					enable = true
+				[markup.goldmark.extensions.extras.superscript]
+					enable = true
+
