@@ -306,7 +306,35 @@ Pronto! Agora você pode se conectar normalmente com outros usuários do Radmin 
 
 ## 4. Usando o Radmin no dia-a-dia
 
-Toda vez que você for ligar a VM pra usar o Radmin, você terá que refazer todo o processo de criar e configurar a ponte entre a Placa Isolada e a Placa do Radmin. Para deixar esse processo mais fácil, eu escrevi um pequeno script que deve ser rodado na VM depois de criar a ponte entre as placas:
+Toda vez que você for ligar a VM pra usar o Radmin, você terá que refazer todo o processo de criar e configurar a ponte entre a Placa Isolada e a Placa do Radmin. Há duas formas de agilizar esse processo: Usando snapshots do Virt Manager, ou usando um batch script. Use o método que for melhor pra você.
+
+### 4.1. Usando snapshots
+
+Pra evitar de ter que fazer a mesma configuração toda hora, criaremos uma snapshot da VM depois da configuração ter sido feita nela. Comece clicando nesse botão com dois monitores:
+
+![](/img/radmin-no-linux/new18.png)
+
+Uma janela vazia deve abrir pra você. Basta agora clicar no botãozinho de "mais" no canto inferior esquerdo.
+
+![](/img/radmin-no-linux/new19.png)
+
+Isso vai abrir um pop-up, perguntando o nome que você quer dar pra snapshot, descrição, e um print da tela da VM.
+
+![](/img/radmin-no-linux/new20.png)
+
+Só clicar em "Finish", e pronto, você criou uma snapshot. Toda vez que você quiser carregar essa snapshot, clique no botão de "play", do lado daquele botãozinho de "mais".
+
+Resumindo, pra ligar o Radmin usando esse método, você vai...
+
+1. Ligar a VM;
+2. Carregar a snapshot;
+3. Esperar um pouco.
+
+**Obs.: A snapshot não salva a data atual, e sim a data de quando você criou ela (se eu criei ela no dia 20, toda vez que eu carregar a snapshot, a VM vai estar presa no dia 20). Me disseram que isso pode causar uns problemas no Windows depois de um tempo, então é bom de vez em quando refazer a snapshot pra evitar problemas relacionados a data incorreta.**
+
+### 4.2. Usando um batch script
+
+A ideia desse script é fazer toda a configuração da ponte de uma vez só, depois de criar ela.
 
 ```
 @echo off
@@ -332,6 +360,7 @@ Resumidamente, para usar o Radmin no Linux depois desse processo todo, o passo-a
 4. Deletar a ponte *e esperar o Radmin conectar*;
 5. Criar a ponte, selecionando a Placa Isolada e a Placa do Radmin, clicando com o botão direito *na Placa do Radmin*, e clicar em "Bridge Connections";
 6. Rodar o script acima;
+7. Esperar um pouco.
 
 E pronto. Como foi mencionado anteriormente, se quiser, agora você pode abaixar as configs da VM pra 1 núcleo de CPU e 512MB de RAM.
 
